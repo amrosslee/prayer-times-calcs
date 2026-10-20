@@ -11,11 +11,25 @@ approximations rather than a guarantee for every locality or scholarly conventio
 
 ## Install
 
-The Packagist name is provisional until the publisher/vendor is confirmed:
+Packagist publication is not set up yet. Until it is published, configure the repository in the
+consuming application's `composer.json`:
 
-```sh
-composer require amrosslee/global-prayer-times
+```json
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/amrosslee/prayer-times-calcs"
+    }
+  ],
+  "require": {
+    "amrosslee/global-prayer-times": "dev-main"
+  }
+}
 ```
+
+Then run `composer update amrosslee/global-prayer-times`. Once the package is published on
+Packagist, remove the VCS repository entry and require a tagged release version.
 
 ## Supported features
 
@@ -139,7 +153,7 @@ Then run `composer update amrosslee/global-prayer-times` in the application.
 
 ## First release checklist
 
-- Confirm the Packagist vendor/package name and set the correct public Git repository metadata.
+- Confirm the Packagist account/vendor name is `amrosslee`.
 - Run `composer validate --strict`, `composer test`, `composer analyse`, and `composer style`.
 - Verify the CI matrix succeeds on every supported PHP version.
 - Review README usage/limitations, reference-fixture sources, MIT license and upstream attribution.
@@ -149,7 +163,8 @@ Then run `composer update amrosslee/global-prayer-times` in the application.
 
 ## Release status
 
-This package is not ready for publication. Remaining work includes broader reference fixtures and
-regression coverage across all named methods, timezone transitions, and geographic/date boundaries,
-verification of the Packagist vendor name, and a successful PHP 8.3 CI run. The local environment
-currently has PHP 8.5 only; a passing PHP 8.5 test run does not substitute for validation on PHP 8.3.
+The GitHub Actions matrix has passed on PHP 8.3, 8.4, and 8.5 for the published commit. This
+worktree may contain later unpushed changes, so rerun CI before tagging. The package is not ready
+for publication: broader reference fixtures and regression coverage across all methods, timezone
+transitions, and geographic/date boundaries remain; confirm the Packagist vendor account and verify
+a clean Composer install before release.

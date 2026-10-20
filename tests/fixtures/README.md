@@ -35,6 +35,18 @@ same pinned upstream test for `35.775, -78.6336` on 2015-07-12, using the ISNA/N
 parameters, Hanafi Asr, and `America/New_York`. Its six expected local times come from that
 upstream test and are compared exactly to the minute.
 
+`PrayerTimesCalculatorTest::test_matches_upstream_mwl_reference_case` uses the expected times
+from the pinned Adhan JS [`test/adhan.test.ts`](https://github.com/batoulapps/adhan-js/blob/46ed34d64bb396391e9cfef768cb8c6c43032716/test/adhan.test.ts)
+"using offsets to manually adjust prayer times" case at coordinates `35.775, -78.6336`, date
+2015-12-01, timezone `America/New_York`, and MWL. The upstream case's first set of times is before
+its subsequent manual offsets are applied; this test uses that unadjusted set and compares exactly
+to the minute.
+
+`PrayerTimesCalculatorTest::test_matches_upstream_egyptian_reference_case` reproduces the pinned
+Adhan JS [`test/adhan.test.ts`](https://github.com/batoulapps/adhan-js/blob/46ed34d64bb396391e9cfef768cb8c6c43032716/test/adhan.test.ts)
+Egyptian-method case for Cairo (`30.028703, 31.249528`), date 2020-01-01, timezone `Africa/Cairo`.
+The upstream test supplies all six expected times; this test compares exactly to the minute.
+
 These reference checks do not imply universal religious or astronomical accuracy. Preserve each
 fixture's source and stated adjustment variance when adding cases. The reference data are not copied
 into runtime code.

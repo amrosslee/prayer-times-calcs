@@ -259,6 +259,52 @@ final class PrayerTimesCalculatorTest extends TestCase
         ], '2018-01-01', 60);
     }
 
+    public function test_matches_upstream_mwl_reference_case(): void
+    {
+        $times = (new PrayerTimesCalculator())->calculate(
+            LocalDate::fromString('2015-12-01'),
+            new Coordinates(35.775, -78.6336),
+            'America/New_York',
+            CalculationSettings::muslimWorldLeague(),
+        );
+
+        $expected = [
+            'fajr' => '05:35',
+            'sunrise' => '07:06',
+            'dhuhr' => '12:05',
+            'asr' => '14:42',
+            'maghrib' => '17:01',
+            'isha' => '18:26',
+        ];
+
+        foreach ($times->all() as $prayer => $time) {
+            self::assertSame($expected[$prayer], $time->format('H:i'), $prayer);
+        }
+    }
+
+    public function test_matches_upstream_egyptian_reference_case(): void
+    {
+        $times = (new PrayerTimesCalculator())->calculate(
+            LocalDate::fromString('2020-01-01'),
+            new Coordinates(30.028703, 31.249528),
+            'Africa/Cairo',
+            CalculationSettings::egyptian(),
+        );
+
+        $expected = [
+            'fajr' => '05:18',
+            'sunrise' => '06:51',
+            'dhuhr' => '11:59',
+            'asr' => '14:47',
+            'maghrib' => '17:06',
+            'isha' => '18:29',
+        ];
+
+        foreach ($times->all() as $prayer => $time) {
+            self::assertSame($expected[$prayer], $time->format('H:i'), $prayer);
+        }
+    }
+
     public function test_matches_upstream_isna_hanafi_reference_case(): void
     {
         $times = (new PrayerTimesCalculator())->calculate(

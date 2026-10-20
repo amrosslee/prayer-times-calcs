@@ -3,6 +3,11 @@
     "description": "Offline, framework-independent Islamic prayer-time calculations",
     "type": "library",
     "license": "MIT",
+    "homepage": "https://github.com/amrosslee/prayer-times-calcs",
+    "support": {
+        "issues": "https://github.com/amrosslee/prayer-times-calcs/issues",
+        "source": "https://github.com/amrosslee/prayer-times-calcs"
+    },
     "keywords": [
         "adhan",
         "islam",
