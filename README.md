@@ -1,8 +1,8 @@
 # Global Prayer Times
 
-Framework-independent, offline Islamic prayer-time calculations for PHP. This package is
-unreleased; prayer-time conventions vary, and the configurable polar fallbacks are explicit
-approximations rather than a guarantee for every locality or scholarly convention.
+Framework-independent, offline Islamic prayer-time calculations for PHP. Stable release `1.0.0`
+is available on Packagist. Prayer-time conventions vary, and the configurable polar fallbacks are
+explicit approximations rather than a guarantee for every locality or scholarly convention.
 
 ## Requirements
 
@@ -11,25 +11,13 @@ approximations rather than a guarantee for every locality or scholarly conventio
 
 ## Install
 
-Packagist publication is not set up yet. Until it is published, configure the repository in the
-consuming application's `composer.json`:
+Install the latest stable release with Composer:
 
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/amrosslee/prayer-times-calcs"
-    }
-  ],
-  "require": {
-    "amrosslee/global-prayer-times": "dev-main"
-  }
-}
+```sh
+composer require amrosslee/global-prayer-times:^1.0
 ```
 
-Then run `composer update amrosslee/global-prayer-times`. Once the package is published on
-Packagist, remove the VCS repository entry and require a tagged release version.
+See the [Packagist package page](https://packagist.org/packages/amrosslee/global-prayer-times).
 
 ## Supported features
 
@@ -151,20 +139,15 @@ repository in that application's `composer.json` (adjust the relative path as ne
 
 Then run `composer update amrosslee/global-prayer-times` in the application.
 
-## First release checklist
+## Release and coverage status
 
-- Confirm the Packagist account/vendor name is `amrosslee`.
-- Run `composer validate --strict`, `composer test`, `composer analyse`, and `composer style`.
-- Verify the CI matrix succeeds on every supported PHP version.
-- Review README usage/limitations, reference-fixture sources, MIT license and upstream attribution.
-- Update `CHANGELOG.md`, commit the release, and push a matching semantic-version Git tag such as `v1.0.0`.
-- Submit the public repository to Packagist and configure its GitHub webhook.
-- Verify a clean application can install the tagged package with Composer.
+Release `1.0.0` is published on Packagist. CI runs the test, static-analysis, and style checks on
+PHP 8.3, 8.4, and 8.5. Reference comparisons cover selected methods and scenarios, not every
+method/location/date combination; in particular, Karachi and Jafari currently have configuration
+and calculation smoke coverage but no dedicated numerical reference fixtures. Results should be
+validated against local scholarly or institutional guidance when exact timetable conformity is
+required. See [tests/fixtures/README.md](tests/fixtures/README.md) for sources, tolerances, and
+known limits.
 
-## Release status
-
-The GitHub Actions matrix has passed on PHP 8.3, 8.4, and 8.5 for the published commit. This
-worktree may contain later unpushed changes, so rerun CI before tagging. The package is not ready
-for publication: broader reference fixtures and regression coverage across all methods, timezone
-transitions, and geographic/date boundaries remain; confirm the Packagist vendor account and verify
-a clean Composer install before release.
+For subsequent releases, update `CHANGELOG.md`, run the checks above, push a semantic-version tag,
+and verify that the new version appears on Packagist and installs in a clean Composer project.
