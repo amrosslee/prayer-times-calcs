@@ -19,6 +19,25 @@ use PHPUnit\Framework\TestCase;
 
 final class PrayerTimesCalculatorTest extends TestCase
 {
+    public function test_default_configuration_template_returns_expected_options(): void
+    {
+        $configuration = require dirname(__DIR__) . '/config/global-prayer-times.php';
+
+        self::assertSame([
+            'method' => 'muslim_world_league',
+            'asr_rule' => 'standard',
+            'high_latitude_rule' => 'middle_of_the_night',
+            'polar_resolution' => 'unresolved',
+            'adjustments' => [],
+            'custom' => [
+                'fajr_angle' => 18.0,
+                'isha_angle' => 17.0,
+                'isha_interval_minutes' => null,
+                'maghrib_angle' => null,
+            ],
+        ], $configuration);
+    }
+
     public function test_calculates_doha_reference_fixture_with_custom_interval_settings(): void
     {
         $times = (new PrayerTimesCalculator())->calculate(

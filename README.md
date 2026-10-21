@@ -39,6 +39,32 @@ Egyptian, and Karachi. Caller-provided prayer adjustments are added to those def
 uses a fixed 90-minute Isha interval; to follow the documented Ramadan convention, pass an
 additional Isha adjustment for the relevant dates.
 
+## Configuration template
+
+The package includes [config/global-prayer-times.php](config/global-prayer-times.php), a plain PHP
+array of suggested defaults and supported options, formatted in the familiar Laravel configuration
+style. It does not call Laravel's `env()` helper, load itself automatically, or set global state.
+Applications should read their own configuration and pass an explicit `CalculationSettings`
+instance to each calculation. Use the named `CalculationSettings` factories for built-in methods
+and `CalculationSettings::custom()` for custom parameters.
+
+### Use the template in Laravel
+
+This standalone package does not provide a Laravel service provider, so Laravel's
+`php artisan vendor:publish` command cannot publish this file. After installing the package, copy
+the template into your application's config directory:
+
+```sh
+cp vendor/amrosslee/global-prayer-times/config/global-prayer-times.php config/global-prayer-times.php
+```
+
+The copied file is now application-owned and can be edited like any other Laravel config file.
+Laravel will make its values available through `config('global-prayer-times.method')`. The package
+does not automatically convert that array into calculation settings; your application should map
+the chosen values to a `CalculationSettings` factory and pass the resulting settings explicitly
+when calculating prayer times. Since the file is copied rather than registered with Laravel,
+package updates will not overwrite your application's copy.
+
 When sunrise or sunset is absent for the requested date, the default `Unresolved` polar policy
 throws `CalculationException`. `NearestValidDate` searches up to 183 days before and after the
 requested date, preferring the next valid date at equal distances. `NearestValidLatitude` searches
@@ -117,8 +143,9 @@ composer analyse
 composer style
 ```
 
-To use this checkout from a future Laravel application before publishing, add a Composer path
-repository in that application's `composer.json` (adjust the relative path as needed):
+When actively developing the package alongside an application, you can optionally use this local
+checkout through a Composer path repository (adjust the relative path as needed). This is not
+required for normal installation; use the Packagist install command above otherwise.
 
 ```json
 {

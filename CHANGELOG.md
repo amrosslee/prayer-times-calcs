@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added a Laravel-style PHP configuration template listing package defaults and supported options.
+
 ## 1.0.0 - 2026-10-20
 
 - Created the standalone Composer package foundation.
